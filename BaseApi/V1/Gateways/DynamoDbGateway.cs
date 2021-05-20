@@ -22,7 +22,7 @@ namespace BaseApi.V1.Gateways
 
         public Entity GetEntityById(int id)
         {
-            var result = _dynamoDbContext.LoadAsync<DatabaseEntity>(id).GetAwaiter().GetResult();
+            var result = _dynamoDbContext.LoadAsync<ChargeDbEntity>(id).GetAwaiter().GetResult();
             return result?.ToDomain();
         }
     }
