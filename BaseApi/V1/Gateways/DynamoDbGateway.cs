@@ -23,7 +23,8 @@ namespace BaseApi.V1.Gateways
 
         public Charge GetEntityById(int id)
         {
-            throw new System.NotImplementedException();
+            var result = _dynamoDbContext.LoadAsync<ChargeDbEntity>(id).GetAwaiter().GetResult();
+            return result?.ToDomain();
         }
     }
 }
