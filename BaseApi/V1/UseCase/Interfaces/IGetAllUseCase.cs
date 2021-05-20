@@ -4,6 +4,6 @@ namespace BaseApi.V1.UseCase.Interfaces
 {
     public interface IGetAllUseCase
     {
-        ResponseObjectList Execute();
+        ChargeResponseObjectList Execute();
     }
 }

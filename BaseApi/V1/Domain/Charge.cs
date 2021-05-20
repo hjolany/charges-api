@@ -2,7 +2,6 @@ using System;
 
 namespace BaseApi.V1.Domain
 {
-    //TODO: rename this class to be the domain object which this API will getting. e.g. Residents or Claimants
     public class Charge
     {
         public int Id { get; set; }
@@ -22,7 +21,5 @@ namespace BaseApi.V1.Domain
         public DateTime TimeStamp { get; set; }
         public string ServiceChargeSchedule { get; set; }
         public string DataImportSource { get; set; }
-
-        //TODO: Add fields which you are interested in
     }
 }

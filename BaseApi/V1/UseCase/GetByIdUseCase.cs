@@ -15,7 +15,7 @@ namespace BaseApi.V1.UseCase
         }
 
         //TODO: rename id to the name of the identifier that will be used for this API, the type may also need to change
-        public ResponseObject Execute(int id)
+        public ChargeResponseObject Execute(int id)
         {
             return _gateway.GetEntityById(id).ToResponse();
         }

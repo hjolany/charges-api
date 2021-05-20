@@ -14,9 +14,9 @@ namespace BaseApi.V1.UseCase
             _gateway = gateway;
         }
 
-        public ResponseObjectList Execute()
+        public ChargeResponseObjectList Execute()
         {
-            return new ResponseObjectList { ResponseObjects = _gateway.GetAll().ToResponse() };
+            return new ChargeResponseObjectList { ChargeResponseObjects = _gateway.GetAll().ToResponse() };
         }
     }
 }

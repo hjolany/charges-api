@@ -4,6 +4,6 @@ namespace BaseApi.V1.UseCase.Interfaces
 {
     public interface IGetByIdUseCase
     {
-        ResponseObject Execute(int id);
+        ChargeResponseObject Execute(int id);
     }
 }

@@ -31,7 +31,7 @@ namespace BaseApi.Tests.V1.UseCase
             var stubbedEntities = _fixture.CreateMany<Entity>().ToList();
             _mockGateway.Setup(x => x.GetAll()).Returns(stubbedEntities);
 
-            var expectedResponse = new ResponseObjectList { ResponseObjects = stubbedEntities.ToResponse() };
+            var expectedResponse = new ChargeResponseObjectList { ChargeResponseObjects = stubbedEntities.ToResponse() };
 
             _classUnderTest.Execute().Should().BeEquivalentTo(expectedResponse);
         }

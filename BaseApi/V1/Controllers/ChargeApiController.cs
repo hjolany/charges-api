@@ -7,15 +7,15 @@ namespace BaseApi.V1.Controllers
 {
     [ApiController]
     //TODO: Rename to match the APIs endpoint
-    [Route("api/v1/residents")]
+    [Route("api/v1/charges")]
     [Produces("application/json")]
     [ApiVersion("1.0")]
     //TODO: rename class to match the API name
-    public class BaseApiController : BaseController
+    public class ChargeApiController : BaseController
     {
         private readonly IGetAllUseCase _getAllUseCase;
         private readonly IGetByIdUseCase _getByIdUseCase;
-        public BaseApiController(IGetAllUseCase getAllUseCase, IGetByIdUseCase getByIdUseCase)
+        public ChargeApiController(IGetAllUseCase getAllUseCase, IGetByIdUseCase getByIdUseCase)
         {
             _getAllUseCase = getAllUseCase;
             _getByIdUseCase = getByIdUseCase;
@@ -27,7 +27,7 @@ namespace BaseApi.V1.Controllers
         /// </summary>
         /// <response code="200">...</response>
         /// <response code="400">Invalid Query Parameter.</response>
-        [ProducesResponseType(typeof(ResponseObjectList), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ChargeResponseObjectList), StatusCodes.Status200OK)]
         [HttpGet]
         public IActionResult ListContacts()
         {
@@ -39,7 +39,7 @@ namespace BaseApi.V1.Controllers
         /// </summary>
         /// <response code="200">...</response>
         /// <response code="404">No ? found for the specified ID</response>
-        [ProducesResponseType(typeof(ResponseObject), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ChargeResponseObject), StatusCodes.Status200OK)]
         [HttpGet]
         //TODO: rename to match the identifier that will be used
         [Route("{yourId}")]
