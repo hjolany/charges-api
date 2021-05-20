@@ -13,14 +13,14 @@ namespace BaseApi.Tests.V1.UseCase
 {
     public class GetAllUseCaseTests
     {
-        private Mock<IChargeGateway> _mockGateway;
+        private Mock<IChargeApiGateway> _mockGateway;
         private GetAllUseCase _classUnderTest;
         private Fixture _fixture;
 
         [SetUp]
         public void SetUp()
         {
-            _mockGateway = new Mock<IChargeGateway>();
+            _mockGateway = new Mock<IChargeApiGateway>();
             _classUnderTest = new GetAllUseCase(_mockGateway.Object);
             _fixture = new Fixture();
         }

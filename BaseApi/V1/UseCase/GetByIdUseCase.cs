@@ -8,8 +8,8 @@ namespace BaseApi.V1.UseCase
     //TODO: Rename class name and interface name to reflect the entity they are representing eg. GetClaimantByIdUseCase
     public class GetByIdUseCase : IGetByIdUseCase
     {
-        private IChargeGateway _gateway;
-        public GetByIdUseCase(IChargeGateway gateway)
+        private IChargeApiGateway _gateway;
+        public GetByIdUseCase(IChargeApiGateway gateway)
         {
             _gateway = gateway;
         }

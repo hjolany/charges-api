@@ -125,7 +125,7 @@ namespace BaseApi
         {
             var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
 
-            services.AddDbContext<DatabaseContext>(
+            services.AddDbContext<ChargeContext>(
                 opt => opt.UseNpgsql(connectionString).AddXRayInterceptor(true));
         }
 
@@ -151,7 +151,7 @@ namespace BaseApi
 
         private static void RegisterGateways(IServiceCollection services)
         {
-            services.AddScoped<IChargeGateway, ChargeGateway>();
+            services.AddScoped<IChargeApiGateway, ChargeApiGateway>();
 
             //TODO: For DynamoDb, remove the line above and uncomment the line below.
             //services.AddScoped<IExampleGateway, DynamoDbGateway>();

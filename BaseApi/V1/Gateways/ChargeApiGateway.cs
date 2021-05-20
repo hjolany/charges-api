@@ -6,11 +6,11 @@ using BaseApi.V1.Infrastructure;
 namespace BaseApi.V1.Gateways
 {
     //TODO: Rename to match the data source that is being accessed in the gateway eg. MosaicGateway
-    public class ChargeGateway : IChargeGateway
+    public class ChargeApiGateway : IChargeApiGateway
     {
-        private readonly DatabaseContext _databaseContext;
+        private readonly ChargeContext _databaseContext;
 
-        public ChargeGateway(DatabaseContext databaseContext)
+        public ChargeApiGateway(ChargeContext databaseContext)
         {
             _databaseContext = databaseContext;
         }

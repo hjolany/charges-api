@@ -2,11 +2,12 @@ using Amazon.DynamoDBv2.DataModel;
 using BaseApi.V1.Domain;
 using BaseApi.V1.Factories;
 using BaseApi.V1.Infrastructure;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 
 namespace BaseApi.V1.Gateways
 {
-    public class DynamoDbGateway : IChargeGateway
+    public class DynamoDbGateway : IChargeApiGateway
     {
         private readonly IDynamoDBContext _dynamoDbContext;
 
@@ -15,15 +16,14 @@ namespace BaseApi.V1.Gateways
             _dynamoDbContext = dynamoDbContext;
         }
 
-        public List<Entity> GetAll()
+        public List<Charge> GetAll()
         {
-            return new List<Entity>();
+            return new List<Charge>();
         }
 
-        public Entity GetEntityById(int id)
+        public Charge GetEntityById(int id)
         {
-            var result = _dynamoDbContext.LoadAsync<ChargeDbEntity>(id).GetAwaiter().GetResult();
-            return result?.ToDomain();
+            throw new System.NotImplementedException();
         }
     }
 }

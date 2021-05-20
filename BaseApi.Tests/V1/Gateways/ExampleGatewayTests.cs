@@ -14,12 +14,12 @@ namespace BaseApi.Tests.V1.Gateways
     public class ExampleGatewayTests : DatabaseTests
     {
         private readonly Fixture _fixture = new Fixture();
-        private ChargeGateway _classUnderTest;
+        private ChargeApiGateway _classUnderTest;
 
         [SetUp]
         public void Setup()
         {
-            _classUnderTest = new ChargeGateway(DatabaseContext);
+            _classUnderTest = new ChargeApiGateway(DatabaseContext);
         }
 
         [Test]
