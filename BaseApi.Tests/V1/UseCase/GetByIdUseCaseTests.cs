@@ -7,13 +7,13 @@ namespace BaseApi.Tests.V1.UseCase
 {
     public class GetByIdUseCaseTests
     {
-        private Mock<IExampleGateway> _mockGateway;
+        private Mock<IChargeGateway> _mockGateway;
         private GetByIdUseCase _classUnderTest;
 
         [SetUp]
         public void SetUp()
         {
-            _mockGateway = new Mock<IExampleGateway>();
+            _mockGateway = new Mock<IChargeGateway>();
             _classUnderTest = new GetByIdUseCase(_mockGateway.Object);
         }
 

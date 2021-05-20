@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace BaseApi.V1.Gateways
 {
-    public class DynamoDbGateway : IExampleGateway
+    public class DynamoDbGateway : IChargeGateway
     {
         private readonly IDynamoDBContext _dynamoDbContext;
 
