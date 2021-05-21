@@ -11,6 +11,6 @@ namespace BaseApi.V1.Infrastructure
         {
         }
 
-        public DbSet<ChargeDbEntity> DatabaseEntities { get; set; }
+        public DbSet<ChargeDbEntity> ChargeEntities { get; set; }
     }
 }
