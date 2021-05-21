@@ -15,11 +15,12 @@ namespace BaseApi.V1.Controllers
     {
         private readonly IGetAllUseCase _getAllUseCase;
         private readonly IGetByIdUseCase _getByIdUseCase;
+
         public ChargeApiController(IGetAllUseCase getAllUseCase, IGetByIdUseCase getByIdUseCase)
         {
             _getAllUseCase = getAllUseCase;
             _getByIdUseCase = getByIdUseCase;
-        }
+        }  
 
         //TODO: add xml comments containing information that will be included in the auto generated swagger docs (https://github.com/LBHackney-IT/lbh-base-api/wiki/Controllers-and-Response-Objects)
         /// <summary>

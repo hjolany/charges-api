@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BaseApi.V1.Infrastructure
@@ -6,7 +7,9 @@ namespace BaseApi.V1.Infrastructure
     [Table("charge_table")]
     public class ChargeDbEntity
     {
+        [Key]
         [Column("id",TypeName ="int")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Column("charge_type",TypeName = "varchar(50)")]
         public string ChargeType { get; set; }
