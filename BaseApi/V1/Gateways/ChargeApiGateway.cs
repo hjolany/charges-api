@@ -8,16 +8,16 @@ namespace BaseApi.V1.Gateways
     //TODO: Rename to match the data source that is being accessed in the gateway eg. MosaicGateway
     public class ChargeApiGateway : IChargeApiGateway
     {
-        private readonly ChargeContext _databaseContext;
+        private readonly ChargeContext _chargeDbContext;
 
-        public ChargeApiGateway(ChargeContext databaseContext)
+        public ChargeApiGateway(ChargeContext chargeDbContext)
         {
-            _databaseContext = databaseContext;
+            _chargeDbContext = chargeDbContext;
         }
 
         public Charge GetEntityById(int id)
         {
-            var result = _databaseContext.ChargeEntities.Find(id);
+            var result = _chargeDbContext.ChargeEntities.Find(id);
 
             return result?.ToDomain();
         }
@@ -27,9 +27,9 @@ namespace BaseApi.V1.Gateways
             return new List<Charge>();
         }
 
-        /*public void Add(Charge entity)
+        public void Add(Charge entity)
         {
-            throw new System.NotImplementedException();
+            _chargeDbContext.ChargeEntities.Add(entity.ToDatabase());
         }
 
         public void Remove(Charge entity)
@@ -40,6 +40,11 @@ namespace BaseApi.V1.Gateways
         public void Update(int id, Charge entity)
         {
             throw new System.NotImplementedException();
-        }*/
+        }
+
+        public void SaveChanges()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

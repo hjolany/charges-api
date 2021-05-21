@@ -9,8 +9,9 @@ namespace BaseApi.V1.Gateways
 
         public List<Charge> GetAll();
 
-        /*void Add(Charge entity);
+        void Add(Charge entity);
         void Remove(Charge entity);
-        void Update(int id, Charge entity);*/
+        void Update(int id, Charge entity);
+        void SaveChanges();
     }
 }

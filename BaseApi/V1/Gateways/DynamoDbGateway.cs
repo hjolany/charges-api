@@ -16,6 +16,11 @@ namespace BaseApi.V1.Gateways
             _dynamoDbContext = dynamoDbContext;
         }
 
+        public void Add(Charge entity)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public List<Charge> GetAll()
         {
             return new List<Charge>();
@@ -25,6 +30,21 @@ namespace BaseApi.V1.Gateways
         {
             var result = _dynamoDbContext.LoadAsync<ChargeDbEntity>(id).GetAwaiter().GetResult();
             return result?.ToDomain();
+        }
+
+        public void Remove(Charge entity)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void SaveChanges()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Update(int id, Charge entity)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
