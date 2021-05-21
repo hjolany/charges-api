@@ -17,7 +17,7 @@ namespace BaseApi.V1.Gateways
 
         public Charge GetEntityById(int id)
         {
-            var result = _databaseContext.DatabaseEntities.Find(id);
+            var result = _databaseContext.ChargeEntities.Find(id);
 
             return result?.ToDomain();
         }
