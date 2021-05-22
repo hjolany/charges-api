@@ -34,17 +34,17 @@ namespace BaseApi.V1.Gateways
 
         public void Remove(Charge entity)
         {
-            throw new System.NotImplementedException();
+            _chargeDbContext.ChargeEntities.Remove(entity.ToDatabase());
         }
 
-        public void Update(int id, Charge entity)
+        public void Update(Charge entity)
         {
-            throw new System.NotImplementedException();
+            _chargeDbContext.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
         }
 
         public void SaveChanges()
         {
-            throw new System.NotImplementedException();
+            _chargeDbContext.SaveChanges();
         }
     }
 }

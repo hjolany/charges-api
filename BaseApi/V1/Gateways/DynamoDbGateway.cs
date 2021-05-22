@@ -42,7 +42,7 @@ namespace BaseApi.V1.Gateways
             throw new System.NotImplementedException();
         }
 
-        public void Update(int id, Charge entity)
+        public void Update(Charge entity)
         {
             throw new System.NotImplementedException();
         }
