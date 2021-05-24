@@ -15,11 +15,10 @@ namespace BaseApi.V1.UseCase
             _gateway = gateway;
         }
 
-        public ChargeResponseObjectList Execute(Charge charge)
+        public ChargeResponseObject Execute(Charge charge)
         {
-            return new ChargeResponseObjectList {
-                ChargeResponseObjects = _gateway.Add(charge)
-            };
+            _gateway.Add(charge);
+            return charge.ToResponse();
         }
     }
 }

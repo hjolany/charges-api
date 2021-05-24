@@ -1,7 +1,10 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using BaseApi.V1.Domain;
 using BaseApi.V1.Factories;
 using BaseApi.V1.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace BaseApi.V1.Gateways
 {
@@ -24,27 +27,60 @@ namespace BaseApi.V1.Gateways
 
         public List<Charge> GetAll()
         {
-            return new List<Charge>();
+            IQueryable<ChargeDbEntity> data =  _chargeDbContext.ChargeEntities;
+            return data.Select(s=>s.ToDomain()).ToList();
         }
 
-        public void Add(Charge entity)
+        public void Add(Charge charge)
         {
-            _chargeDbContext.ChargeEntities.Add(entity.ToDatabase());
+            _chargeDbContext.ChargeEntities.Add(charge.ToDatabase());
         }
 
-        public void Remove(Charge entity)
+        public void Remove(Charge charge)
         {
-            _chargeDbContext.ChargeEntities.Remove(entity.ToDatabase());
+            _chargeDbContext.ChargeEntities.Remove(charge.ToDatabase());
         }
 
-        public void Update(Charge entity)
+        public void Update(Charge charge)
         {
-            _chargeDbContext.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _chargeDbContext.Entry(charge).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
         }
 
         public void SaveChanges()
         {
             _chargeDbContext.SaveChanges();
+        }
+
+        public async Task<Charge> GetEntityByIdAsync(int id)
+        {
+            var result = await _chargeDbContext.ChargeEntities.FindAsync(id).ConfigureAwait(false);
+            return result?.ToDomain();
+        }
+
+        public async Task<List<Charge>> GetAllAsync()
+        {
+            IQueryable<ChargeDbEntity> data = _chargeDbContext.ChargeEntities;
+            return await data.Select(s => s.ToDomain()).ToListAsync().ConfigureAwait(false);
+        }
+
+        public async Task AddAsync(Charge charge)
+        {
+            await _chargeDbContext.AddAsync(charge).ConfigureAwait(false);
+        }
+
+        public void RemoveRange(List<Charge> charges)
+        {
+            _chargeDbContext.RemoveRange(charges);
+        }
+
+        public void AddRange(List<Charge> charges)
+        {
+            _chargeDbContext.AddRange(charges);
+        }
+
+        public async Task AddRangeAsync(List<Charge> charges)
+        {
+            await _chargeDbContext.AddRangeAsync(charges).ConfigureAwait(false);
         }
     }
 }

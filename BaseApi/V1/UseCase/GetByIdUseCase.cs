@@ -2,6 +2,7 @@ using BaseApi.V1.Boundary.Response;
 using BaseApi.V1.Factories;
 using BaseApi.V1.Gateways;
 using BaseApi.V1.UseCase.Interfaces;
+using System.Threading.Tasks;
 
 namespace BaseApi.V1.UseCase
 {
@@ -18,6 +19,12 @@ namespace BaseApi.V1.UseCase
         public ChargeResponseObject Execute(int id)
         {
             return _gateway.GetEntityById(id).ToResponse();
+        }
+
+        public async Task<ChargeResponseObject> ExecuteAsync(int id)
+        {
+            var charge = await _gateway.GetEntityByIdAsync(id).ConfigureAwait(false);
+            return charge.ToResponse();
         }
     }
 }

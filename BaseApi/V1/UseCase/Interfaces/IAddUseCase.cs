@@ -5,6 +5,6 @@ namespace BaseApi.V1.UseCase.Interfaces
 {
     public interface IAddUseCase
     {
-        ChargeResponseObjectList Execute(Charge charge);
+        ChargeResponseObject Execute(Charge charge);
     }
 }
