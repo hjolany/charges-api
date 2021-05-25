@@ -66,19 +66,6 @@ namespace BaseApi.V1.Controllers
         {
             return Ok(_getAllUseCase.Execute());
         }
-
-        /// <summary>
-        /// ...
-        /// </summary>
-        /// <response code="200">...</response>
-        /// <response code="404">No ? found for the specified ID</response>
-        [ProducesResponseType(typeof(ChargeResponseObject), StatusCodes.Status200OK)]
-        [HttpGet]
-        //TODO: rename to match the identifier that will be used
-        [Route("{yourId}")]
-        public IActionResult ViewRecord(int yourId)
-        {
-            return Ok(_getByIdUseCase.Execute(yourId));
-        }
+ 
     }
 }

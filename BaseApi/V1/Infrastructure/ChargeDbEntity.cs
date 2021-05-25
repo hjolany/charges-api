@@ -1,47 +1,63 @@
+using Amazon.DynamoDBv2.DataModel;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BaseApi.V1.Infrastructure
 { 
-    [Table("charge_table")]
+    [DynamoDBTable("charges",LowerCamelCaseProperties = true)]
     public class ChargeDbEntity
     {
-        [Key]
-        [Column("id",TypeName ="int")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DynamoDBHashKey]
         public int Id { get; set; }
-        [Column("charge_type",TypeName = "varchar(50)")]
+
+        [DynamoDBProperty(AttributeName = "charge_type")]
         public string ChargeType { get; set; }
-        [Column("charge_source", TypeName = "varchar(50)")]
+
+        [DynamoDBProperty(AttributeName = "charge_source")]
         public string ChargeSource { get; set; }
-        [Column("debit_code", TypeName = "varchar(50)")]
+
+        [DynamoDBProperty(AttributeName = "debit_code")]
         public string DebitCode { get; set; }
-        [Column("debit_code_description", TypeName = "text")]
+
+        [DynamoDBProperty(AttributeName = "debit_code_description")]
         public string DebitCodeDescription { get; set; }
-        [Column("effective_start_date", TypeName = "datetime2")]
+
+        [DynamoDBProperty(AttributeName = "effective_start_date")]
         public DateTime EffectiveStartDate { get; set; }
-        [Column("termination_date", TypeName = "datetime2")]
+
+
+        [DynamoDBProperty(AttributeName = "termination_date")]
         public DateTime TerminationDate { get; set; }
-        [Column("period_code", TypeName = "varchar(50)")]
+
+        [DynamoDBProperty(AttributeName = "period_code")]
         public string PeriodCode { get; set; }
-        [Column("debit_next_due", TypeName = "datetime2")]
+
+        [DynamoDBProperty(AttributeName = "debit_next_due")]
         public DateTime DebitNextDue { get; set; }
-        [Column("debit_last_charged", TypeName = "datetime2")]
+
+        [DynamoDBProperty(AttributeName = "debit_last_charged")]
         public DateTime DebitLastCharged { get; set; }
-        [Column("debit_active")]
+
+        [DynamoDBProperty(AttributeName = "debit_active")]
         public bool DebitActive { get; set; }
-        [Column("debit_value",TypeName ="decimal")]
+
+        [DynamoDBProperty(AttributeName = "debit_value")]
         public decimal DebitValue { get; set; }
-        [Column("property_debit")]
+
+        [DynamoDBProperty(AttributeName = "property_debit")]
         public bool PropertyDebit { get; set; }
-        [Column("debit_source",TypeName ="varchar(50)")]
+
+        [DynamoDBProperty(AttributeName = "debit_source")]
         public string DebitSource { get; set; }
-        [Column("timestamp", TypeName = "datetime2")]
+
+        [DynamoDBProperty(AttributeName = "timestamp")]
         public DateTime TimeStamp { get; set; }
-        [Column("service_charge_schedule",TypeName = "varchar(50)")]
+
+        [DynamoDBProperty(AttributeName = "service_charge_schedule")]
         public string ServiceChargeSchedule { get; set; }
-        [Column("data_import_source", TypeName = "varchar(50)")]
+
+        [DynamoDBProperty(AttributeName = "data_import_source")]
         public string DataImportSource { get; set; }
     }
 }

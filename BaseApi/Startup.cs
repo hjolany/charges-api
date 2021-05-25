@@ -115,7 +115,7 @@ namespace BaseApi
 
             ConfigureDbContext(services);
             //TODO: For DynamoDb, remove the line above and uncomment the line below.
-            // services.ConfigureDynamoDB();
+            services.ConfigureDynamoDB();
 
             RegisterGateways(services);
             RegisterUseCases(services);
@@ -152,7 +152,6 @@ namespace BaseApi
         private static void RegisterGateways(IServiceCollection services)
         {
             services.AddScoped<IChargeApiGateway, ChargeApiGateway>();
-
             //TODO: For DynamoDb, remove the line above and uncomment the line below.
             //services.AddScoped<IExampleGateway, DynamoDbGateway>();
         }
@@ -161,6 +160,9 @@ namespace BaseApi
         {
             services.AddScoped<IGetAllUseCase, GetAllUseCase>();
             services.AddScoped<IGetByIdUseCase, GetByIdUseCase>();
+            services.AddScoped<IAddUseCase, AddUseCase>();
+            services.AddScoped<IRemoveUseCase, RemoveUseCase>();
+            services.AddScoped<IUpdateUseCase, UpdateUseCase>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
