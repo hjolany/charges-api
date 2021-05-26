@@ -8,7 +8,7 @@ namespace BaseApi.V1.Boundary.Response
         /// <example>
         /// 401
         /// </example>
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         /// <example>
         /// 
         /// </example>

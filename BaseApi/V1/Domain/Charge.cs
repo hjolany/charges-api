@@ -4,7 +4,7 @@ namespace BaseApi.V1.Domain
 {
     public class Charge
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string ChargeType { get; set; }
         public string ChargeSource { get; set; }
         public string DebitCode { get; set; }

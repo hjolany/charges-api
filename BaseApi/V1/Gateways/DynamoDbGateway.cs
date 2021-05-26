@@ -60,9 +60,10 @@ namespace BaseApi.V1.Gateways
             return result?.ToDomain();
         }
 
-        public Task<Charge> GetEntityByIdAsync(int id)
+        public async Task<Charge> GetEntityByIdAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var result = await _dynamoDbContext.LoadAsync<ChargeDbEntity>(id).ConfigureAwait(false);
+            return result?.ToDomain();
         }
 
         public void Remove(Charge charge)

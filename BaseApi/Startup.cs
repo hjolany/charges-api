@@ -113,7 +113,7 @@ namespace BaseApi
 
             ConfigureLogging(services, Configuration);
 
-            ConfigureDbContext(services);
+            //ConfigureDbContext(services);
             //TODO: For DynamoDb, remove the line above and uncomment the line below.
             services.ConfigureDynamoDB();
 
@@ -151,9 +151,9 @@ namespace BaseApi
 
         private static void RegisterGateways(IServiceCollection services)
         {
-            services.AddScoped<IChargeApiGateway, ChargeApiGateway>();
+            //services.AddScoped<IChargeApiGateway, ChargeApiGateway>();
             //TODO: For DynamoDb, remove the line above and uncomment the line below.
-            //services.AddScoped<IExampleGateway, DynamoDbGateway>();
+            services.AddScoped<IChargeApiGateway, DynamoDbGateway>();
         }
 
         private static void RegisterUseCases(IServiceCollection services)

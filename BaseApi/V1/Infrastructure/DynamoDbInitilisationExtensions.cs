@@ -14,7 +14,7 @@ namespace BaseApi.V1.Infrastructure
 
             if (localMode)
             {
-                var url = Environment.GetEnvironmentVariable("DynamoDb_LocalServiceUrl");
+                var url = "http://localhost:8080";// Environment.GetEnvironmentVariable("DynamoDb_LocalServiceUrl");
                 services.AddSingleton<IAmazonDynamoDB>(sp =>
                 {
                     var clientConfig = new AmazonDynamoDBConfig { ServiceURL = url };
