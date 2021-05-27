@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace BaseApi.V1.Gateways
             _chargeDbContext = chargeDbContext;
         }
 
-        public Charge GetEntityById(int id)
+        public Charge GetEntityById(Guid id)
         {
             var result = _chargeDbContext.ChargeEntities.Find(id);
 
@@ -44,6 +45,13 @@ namespace BaseApi.V1.Gateways
         public void Update(Charge charge)
         {
             _chargeDbContext.Entry(charge).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _chargeDbContext.SaveChanges();
+        }
+
+        public async Task UpdateAsync(Charge charge)
+        {
+            _chargeDbContext.Entry(charge).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            await _chargeDbContext.SaveChangesAsync().ConfigureAwait(false);
         }
 
         public void SaveChanges()
@@ -51,7 +59,7 @@ namespace BaseApi.V1.Gateways
             _chargeDbContext.SaveChanges();
         }
 
-        public async Task<Charge> GetEntityByIdAsync(int id)
+        public async Task<Charge> GetEntityByIdAsync(Guid id)
         {
             var result = await _chargeDbContext.ChargeEntities.FindAsync(id).ConfigureAwait(false);
             return result?.ToDomain();
@@ -81,6 +89,20 @@ namespace BaseApi.V1.Gateways
         public async Task AddRangeAsync(List<Charge> charges)
         {
             await _chargeDbContext.AddRangeAsync(charges).ConfigureAwait(false);
+        }
+
+        public async Task RemoveAsync(Charge charge)
+        {
+            _chargeDbContext.Remove(charge);
+            await _chargeDbContext.SaveChangesAsync().ConfigureAwait(false);
+        }
+
+        public async Task RemoveRangeAsync(List<Charge> charges)
+        {
+            foreach (Charge c in charges)
+            {
+                await RemoveAsync(c).ConfigureAwait(false);
+            }
         }
     }
 }

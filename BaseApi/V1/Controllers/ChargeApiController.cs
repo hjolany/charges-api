@@ -1,7 +1,9 @@
 using BaseApi.V1.Boundary.Response;
+using BaseApi.V1.Domain;
 using BaseApi.V1.UseCase.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace BaseApi.V1.Controllers
@@ -45,7 +47,7 @@ namespace BaseApi.V1.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> GetChargeByIdAsunc(int id)
+        public async Task<IActionResult> GetChargeByIdAsunc(Guid id)
         {
             var charge = await _getByIdUseCase.ExecuteAsync(id).ConfigureAwait(false);
             if (charge == null)
@@ -53,19 +55,36 @@ namespace BaseApi.V1.Controllers
             return Ok(charge);
         }
 
-
-        //TODO: add xml comments containing information that will be included in the auto generated swagger docs (https://github.com/LBHackney-IT/lbh-base-api/wiki/Controllers-and-Response-Objects)
-        /// <summary>
-        /// ...
-        /// </summary>
-        /// <response code="200">...</response>
-        /// <response code="400">Invalid Query Parameter.</response>
-        [ProducesResponseType(typeof(ChargeResponseObjectList), StatusCodes.Status200OK)]
-        [HttpGet]
-        public IActionResult ListContacts()
+        [Route("")]
+        [HttpPost]
+        public async Task<IActionResult> PostCharge(Charge charge)
         {
-            return Ok(_getAllUseCase.Execute());
+            await _addUseCase.ExecuteAsync(charge).ConfigureAwait(false);
+            return CreatedAtAction("GetChargeByIdAsunc", new { id = charge.Id }, charge);
         }
- 
+
+        [Route("{id}")]
+        [HttpPut]
+        public async Task<IActionResult> PutCharge([FromRoute]Guid id,[FromBody]Charge charge)
+        {
+            if (id != charge.Id)
+                return NotFound(id);
+
+            await _updateUseCase.ExecuteAsync(charge).ConfigureAwait(false);
+            return CreatedAtAction("GetChargeByIdAsunc", new { id = charge.Id }, charge);
+        }
+
+        [Route("{id}")]
+        [HttpDelete]
+        public async Task<IActionResult> RemoveCharge([FromRoute]Guid id) {
+
+            ChargeResponseObject charge = await _getByIdUseCase.ExecuteAsync(id).ConfigureAwait(false);
+            if (charge == null)
+                return NotFound(id);
+
+            await _removeUseCase.ExecuteAsync(id).ConfigureAwait(false);
+            return NoContent();
+        }
+
     }
 }

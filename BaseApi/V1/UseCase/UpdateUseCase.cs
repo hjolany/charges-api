@@ -3,6 +3,7 @@ using BaseApi.V1.Domain;
 using BaseApi.V1.Factories;
 using BaseApi.V1.Gateways;
 using BaseApi.V1.UseCase.Interfaces;
+using System.Threading.Tasks;
 
 namespace BaseApi.V1.UseCase
 {
@@ -18,6 +19,12 @@ namespace BaseApi.V1.UseCase
         public ChargeResponseObject Execute(Charge charge)
         {
             _gateway.Update(charge);
+            return charge.ToResponse();
+        }
+
+        public async Task<ChargeResponseObject> ExecuteAsync(Charge charge)
+        {
+            await _gateway.UpdateAsync(charge).ConfigureAwait(false);
             return charge.ToResponse();
         }
     }

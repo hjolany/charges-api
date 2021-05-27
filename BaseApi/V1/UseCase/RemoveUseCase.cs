@@ -3,6 +3,8 @@ using BaseApi.V1.Domain;
 using BaseApi.V1.Factories;
 using BaseApi.V1.Gateways;
 using BaseApi.V1.UseCase.Interfaces;
+using System;
+using System.Threading.Tasks;
 
 namespace BaseApi.V1.UseCase
 {
@@ -15,10 +17,16 @@ namespace BaseApi.V1.UseCase
             _gateway = gateway;
         }
 
-        public ChargeResponseObject Execute(Charge charge)
+        public void Execute(Guid id)
         {
+            Charge charge = _gateway.GetEntityById(id);
             _gateway.Remove(charge);
-            return charge.ToResponse();
+        }
+
+        public async Task ExecuteAsync(Guid id)
+        {
+            Charge charge = await _gateway.GetEntityByIdAsync(id).ConfigureAwait(false);
+            _gateway.Remove(charge);
         }
     }
 }

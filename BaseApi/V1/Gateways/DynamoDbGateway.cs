@@ -3,6 +3,7 @@ using BaseApi.V1.Domain;
 using BaseApi.V1.Factories;
 using BaseApi.V1.Infrastructure;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -54,13 +55,13 @@ namespace BaseApi.V1.Gateways
             throw new System.NotImplementedException();
         }
 
-        public Charge GetEntityById(int id)
+        public Charge GetEntityById(Guid id)
         {
             var result = _dynamoDbContext.LoadAsync<ChargeDbEntity>(id).GetAwaiter().GetResult();
             return result?.ToDomain();
         }
 
-        public async Task<Charge> GetEntityByIdAsync(int id)
+        public async Task<Charge> GetEntityByIdAsync(Guid id)
         {
             var result = await _dynamoDbContext.LoadAsync<ChargeDbEntity>(id).ConfigureAwait(false);
             return result?.ToDomain();
@@ -68,12 +69,28 @@ namespace BaseApi.V1.Gateways
 
         public void Remove(Charge charge)
         {
-            throw new System.NotImplementedException();
+            _dynamoDbContext.DeleteAsync<ChargeDbEntity>(charge.ToDatabase());
+        }
+
+        public async Task RemoveAsync(Charge charge)
+        {
+            await _dynamoDbContext.DeleteAsync(charge.ToDatabase()).ConfigureAwait(false);
         }
 
         public void RemoveRange(List<Charge> charges)
         {
-            throw new System.NotImplementedException();
+            charges.ForEach(c =>
+            {
+                Remove(c);
+            });
+        }
+
+        public async Task RemoveRangeAsync(List<Charge> charges)
+        {
+            foreach (Charge c in charges)
+            {
+                await RemoveAsync(c).ConfigureAwait(false);
+            }
         }
 
         public void SaveChanges()
@@ -83,7 +100,12 @@ namespace BaseApi.V1.Gateways
 
         public void Update(Charge charge)
         {
-            throw new System.NotImplementedException();
+            _dynamoDbContext.SaveAsync<ChargeDbEntity>(charge.ToDatabase()).ConfigureAwait(false);
+        }
+
+        public async Task UpdateAsync(Charge charge)
+        {
+            await _dynamoDbContext.SaveAsync<ChargeDbEntity>(charge.ToDatabase()).ConfigureAwait(false);
         }
     }
 }
