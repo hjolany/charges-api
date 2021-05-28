@@ -39,7 +39,7 @@ namespace BaseApi.Tests.V1.Gateways
             DatabaseContext.DatabaseEntities.Add(databaseEntity);
             DatabaseContext.SaveChanges();
 
-            var response = _classUnderTest.GetEntityById(databaseEntity.Id);
+            var response = _classUnderTest.GetChargeById(databaseEntity.Id);
 
             databaseEntity.Id.Should().Be(response.Id);
             databaseEntity.CreatedAt.Should().BeSameDateAs(response.CreatedAt);

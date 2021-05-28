@@ -1,9 +1,12 @@
 using BaseApi.V1.Boundary.Response;
+using System.Threading.Tasks;
 
 namespace BaseApi.V1.UseCase.Interfaces
 {
     public interface IGetAllUseCase
     {
-        ChargeResponseObjectList Execute();
+        public ChargeResponseObjectList Execute();
+        public Task<ChargeResponseObjectList> ExecuteAsync();
     }
 }
+

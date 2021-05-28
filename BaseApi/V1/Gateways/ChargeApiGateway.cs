@@ -19,14 +19,14 @@ namespace BaseApi.V1.Gateways
             _chargeDbContext = chargeDbContext;
         }
 
-        public Charge GetEntityById(Guid id)
+        public Charge GetChargeById(Guid id)
         {
             var result = _chargeDbContext.ChargeEntities.Find(id);
 
             return result?.ToDomain();
         }
 
-        public List<Charge> GetAll()
+        public List<Charge> GetAllCharges()
         {
             IQueryable<ChargeDbEntity> data =  _chargeDbContext.ChargeEntities;
             return data.Select(s=>s.ToDomain()).ToList();
@@ -54,18 +54,13 @@ namespace BaseApi.V1.Gateways
             await _chargeDbContext.SaveChangesAsync().ConfigureAwait(false);
         }
 
-        public void SaveChanges()
-        {
-            _chargeDbContext.SaveChanges();
-        }
-
-        public async Task<Charge> GetEntityByIdAsync(Guid id)
+        public async Task<Charge> GetChargeByIdAsync(Guid id)
         {
             var result = await _chargeDbContext.ChargeEntities.FindAsync(id).ConfigureAwait(false);
             return result?.ToDomain();
         }
 
-        public async Task<List<Charge>> GetAllAsync()
+        public async Task<List<Charge>> GetAllChargesAsync()
         {
             IQueryable<ChargeDbEntity> data = _chargeDbContext.ChargeEntities;
             return await data.Select(s => s.ToDomain()).ToListAsync().ConfigureAwait(false);

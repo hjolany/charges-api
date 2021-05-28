@@ -19,13 +19,13 @@ namespace BaseApi.V1.UseCase
 
         public void Execute(Guid id)
         {
-            Charge charge = _gateway.GetEntityById(id);
+            Charge charge = _gateway.GetChargeById(id);
             _gateway.Remove(charge);
         }
 
         public async Task ExecuteAsync(Guid id)
         {
-            Charge charge = await _gateway.GetEntityByIdAsync(id).ConfigureAwait(false);
+            Charge charge = await _gateway.GetChargeByIdAsync(id).ConfigureAwait(false);
             _gateway.Remove(charge);
         }
     }

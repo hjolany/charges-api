@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using BaseApi.V1.Domain;
 
@@ -7,11 +8,11 @@ namespace BaseApi.V1.Gateways
 {
     public interface IChargeApiGateway
     {
-        public Charge GetEntityById(Guid id);
-        public Task<Charge> GetEntityByIdAsync(Guid id);
+        public Charge GetChargeById(Guid id);
+        public Task<Charge> GetChargeByIdAsync(Guid id);
 
-        public List<Charge> GetAll();
-        public Task<List<Charge>> GetAllAsync();
+        public List<Charge> GetAllCharges();
+        public Task<List<Charge>> GetAllChargesAsync();
 
         public void Add(Charge charge);
         public Task AddAsync(Charge charge);
@@ -25,7 +26,5 @@ namespace BaseApi.V1.Gateways
 
         public void Update(Charge charge);
         public Task UpdateAsync(Charge charge);
-
-        public void SaveChanges();
     }
 }

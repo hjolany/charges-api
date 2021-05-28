@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using BaseApi.V1.Factories;
 
 namespace BaseApi.V1.Controllers
 {
@@ -41,13 +42,13 @@ namespace BaseApi.V1.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [ProducesResponseType(typeof(ChargeResponseObject),StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ChargeResponseObject), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> GetChargeByIdAsunc(Guid id)
+        public async Task<IActionResult> Get(Guid id)
         {
             var charge = await _getByIdUseCase.ExecuteAsync(id).ConfigureAwait(false);
             if (charge == null)
@@ -55,9 +56,22 @@ namespace BaseApi.V1.Controllers
             return Ok(charge);
         }
 
+        [ProducesResponseType(typeof(ChargeResponseObjectList), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpGet]
+        public async Task<IActionResult> GetAllAsync() /*make it async task*/
+        {
+            var charges = await _getAllUseCase.ExecuteAsync().ConfigureAwait(false);
+            if (charges == null)
+                return NoContent();
+            return Ok(charges);
+        }
+
         [Route("")]
         [HttpPost]
-        public async Task<IActionResult> PostCharge(Charge charge)
+        public async Task<IActionResult> Post(Charge charge)
         {
             await _addUseCase.ExecuteAsync(charge).ConfigureAwait(false);
             return CreatedAtAction("GetChargeByIdAsunc", new { id = charge.Id }, charge);
@@ -65,7 +79,7 @@ namespace BaseApi.V1.Controllers
 
         [Route("{id}")]
         [HttpPut]
-        public async Task<IActionResult> PutCharge([FromRoute]Guid id,[FromBody]Charge charge)
+        public async Task<IActionResult> Put([FromRoute] Guid id, [FromBody] Charge charge)
         {
             if (id != charge.Id)
                 return NotFound(id);
@@ -76,7 +90,8 @@ namespace BaseApi.V1.Controllers
 
         [Route("{id}")]
         [HttpDelete]
-        public async Task<IActionResult> RemoveCharge([FromRoute]Guid id) {
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        {
 
             ChargeResponseObject charge = await _getByIdUseCase.ExecuteAsync(id).ConfigureAwait(false);
             if (charge == null)

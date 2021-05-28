@@ -1,7 +1,11 @@
 using BaseApi.V1.Boundary.Response;
+using BaseApi.V1.Domain;
 using BaseApi.V1.Factories;
 using BaseApi.V1.Gateways;
 using BaseApi.V1.UseCase.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BaseApi.V1.UseCase
 {
@@ -16,7 +20,17 @@ namespace BaseApi.V1.UseCase
 
         public ChargeResponseObjectList Execute()
         {
-            return new ChargeResponseObjectList { ChargeResponseObjects = _gateway.GetAll().ToResponse() };
+            return new ChargeResponseObjectList { ChargeResponseObjects = _gateway.GetAllCharges().ToResponse() };
+        }
+
+        public async Task<ChargeResponseObjectList> ExecuteAsync()
+        {
+            ChargeResponseObjectList chargeResponseObjectList = new ChargeResponseObjectList();
+            List<Charge> data = await _gateway.GetAllChargesAsync().ConfigureAwait(false);
+
+            chargeResponseObjectList.ChargeResponseObjects = data.Select(p => p.ToResponse()).ToList();
+
+            return chargeResponseObjectList;
         }
     }
 }
