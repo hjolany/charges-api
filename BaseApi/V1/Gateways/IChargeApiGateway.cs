@@ -26,5 +26,8 @@ namespace BaseApi.V1.Gateways
 
         public void Update(Charge charge);
         public Task UpdateAsync(Charge charge);
+
+        public void CalculateCharges(Guid targetId, string targetType);
+        public Task CalculateChargesAsync(Guid targetId, string targetType);
     }
 }

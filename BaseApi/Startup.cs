@@ -163,6 +163,7 @@ namespace BaseApi
             services.AddScoped<IAddUseCase, AddUseCase>();
             services.AddScoped<IRemoveUseCase, RemoveUseCase>();
             services.AddScoped<IUpdateUseCase, UpdateUseCase>();
+            services.AddScoped<ICalculateChargesUseCase, CalculateChargesUseCase>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

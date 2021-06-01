@@ -1,4 +1,5 @@
 using Amazon.DynamoDBv2.DataModel;
+using BaseApi.V1.Domain;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -22,6 +23,9 @@ namespace BaseApi.V1.Infrastructure
 
         [DynamoDBProperty(AttributeName = "debit_code_description")]
         public string DebitCodeDescription { get; set; }
+
+        [DynamoDBProperty(AttributeName = "target_type",Converter = typeof(DynamoDbEnumConverter<TargetType>))]
+        public TargetType TargetType { get; set; }
 
         [DynamoDBProperty(AttributeName = "effective_start_date")]
         public DateTime EffectiveStartDate { get; set; }

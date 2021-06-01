@@ -9,6 +9,7 @@ namespace BaseApi.V1.Domain
         public string ChargeSource { get; set; }
         public string DebitCode { get; set; }
         public string DebitCodeDescription { get; set; }
+        public TargetType TargetType { get; set; }
         public DateTime EffectiveStartDate { get; set; }
         public DateTime TerminationDate { get; set; }
         public string PeriodCode { get; set; }

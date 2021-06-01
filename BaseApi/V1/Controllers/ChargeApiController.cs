@@ -22,13 +22,15 @@ namespace BaseApi.V1.Controllers
         private readonly IAddUseCase _addUseCase;
         private readonly IRemoveUseCase _removeUseCase;
         private readonly IUpdateUseCase _updateUseCase;
+        private readonly ICalculateChargesUseCase _calculateChargesUseCase;
 
         public ChargeApiController(
             IGetAllUseCase getAllUseCase,
             IGetByIdUseCase getByIdUseCase,
             IAddUseCase addUseCase,
             IRemoveUseCase removeUseCase,
-            IUpdateUseCase updateUseCase
+            IUpdateUseCase updateUseCase,
+            ICalculateChargesUseCase calculateChargesUseCase
         )
         {
             _getAllUseCase = getAllUseCase;
@@ -36,6 +38,7 @@ namespace BaseApi.V1.Controllers
             _addUseCase = addUseCase;
             _removeUseCase = removeUseCase;
             _updateUseCase = updateUseCase;
+            _calculateChargesUseCase = calculateChargesUseCase;
         }
         /// <summary>
         /// Correspondig charge data according the id 
@@ -75,6 +78,14 @@ namespace BaseApi.V1.Controllers
         {
             await _addUseCase.ExecuteAsync(charge).ConfigureAwait(false);
             return CreatedAtAction("GetChargeByIdAsunc", new { id = charge.Id }, charge);
+        }
+
+        [Route("CalculateCharges{targetid}/{targettype}")]
+        [HttpPost]
+        public async Task<IActionResult> CalculateCharges(Guid targetid,string targettype)
+        {
+            await _calculateChargesUseCase.ExecuteAsync(targetid, targettype).ConfigureAwait(false);
+            throw new NotImplementedException();
         }
 
         [Route("{id}")]

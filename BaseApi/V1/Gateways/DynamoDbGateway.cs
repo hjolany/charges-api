@@ -48,6 +48,16 @@ namespace BaseApi.V1.Gateways
             }
         }
 
+        public void CalculateCharges(Guid targetId, string targetType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task CalculateChargesAsync(Guid targetId, string targetType)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Charge> GetAllCharges()
         {
             throw new System.NotImplementedException();
@@ -66,8 +76,7 @@ namespace BaseApi.V1.Gateways
             scanFilter.AddCondition("Id", ScanOperator.GreaterThan, new Guid("00000000-0000-0000-0000-000000000000"));
 
             ScanOperationConfig scanOperationConfig = new ScanOperationConfig() {
-                Limit = 2/*,
-                Filter=scanFilter*/
+                Limit = 2
             };
 
             List<ChargeDbEntity> data =

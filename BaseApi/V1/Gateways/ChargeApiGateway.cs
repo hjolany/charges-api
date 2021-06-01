@@ -99,5 +99,15 @@ namespace BaseApi.V1.Gateways
                 await RemoveAsync(c).ConfigureAwait(false);
             }
         }
+
+        public void CalculateCharges(Guid targetId, string targetType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task CalculateChargesAsync(Guid targetId, string targetType)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
