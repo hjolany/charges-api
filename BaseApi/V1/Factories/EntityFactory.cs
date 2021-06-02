@@ -10,7 +10,7 @@ namespace BaseApi.V1.Factories
             return new Charge
             {
                 Id = databaseEntity.Id,
-                ChargeSource = databaseEntity.ChargeSource,
+                TargetId = databaseEntity.TargetId,
                 ChargeType = databaseEntity.ChargeType,
                 DataImportSource = databaseEntity.DataImportSource,
                 DebitActive = databaseEntity.DebitActive,
@@ -25,7 +25,9 @@ namespace BaseApi.V1.Factories
                 PropertyDebit = databaseEntity.PropertyDebit,
                 ServiceChargeSchedule = databaseEntity.ServiceChargeSchedule,
                 TerminationDate = databaseEntity.TerminationDate,
-                TimeStamp = databaseEntity.TimeStamp
+                TimeStamp = databaseEntity.TimeStamp,
+                TargetType = databaseEntity.TargetType,
+                ChargeDetails = databaseEntity.ChargeDetails                
             };
         }
 
@@ -34,7 +36,8 @@ namespace BaseApi.V1.Factories
             return new ChargeDbEntity
             {
                 Id = entity.Id,
-                ChargeSource = entity.ChargeSource,
+                TargetId = entity.TargetId,
+                ChargeType = entity.ChargeType,
                 TimeStamp = entity.TimeStamp,
                 TerminationDate = entity.TerminationDate,
                 ServiceChargeSchedule = entity.ServiceChargeSchedule,
@@ -43,13 +46,14 @@ namespace BaseApi.V1.Factories
                 EffectiveStartDate = entity.EffectiveStartDate,
                 DebitValue = entity.DebitValue,
                 DebitSource = entity.DebitSource,
-                ChargeType = entity.ChargeType,
                 DataImportSource = entity.DataImportSource,
                 DebitActive = entity.DebitActive,
                 DebitCode = entity.DebitCode,
                 DebitCodeDescription = entity.DebitCodeDescription,
                 DebitLastCharged = entity.DebitLastCharged,
-                DebitNextDue = entity.DebitNextDue
+                DebitNextDue = entity.DebitNextDue,
+                TargetType = entity.TargetType,
+                ChargeDetails = entity.ChargeDetails
             };
         }
     }

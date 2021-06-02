@@ -12,8 +12,9 @@ namespace BaseApi.V1.Factories
             return new ChargeResponseObject()
             {
                 Id = domain.Id,
-                ChargeSource = domain.ChargeSource,
+                TargetId = domain.TargetId,
                 ChargeType = domain.ChargeType,
+                ChargeDetails = domain.ChargeDetails,
                 DataImportSource = domain.DataImportSource,
                 DebitActive = domain.DebitActive,
                 DebitCode = domain.DebitCode,

@@ -1,6 +1,8 @@
 using Amazon.DynamoDBv2.DataModel;
 using BaseApi.V1.Domain;
+using ChargeApi.V1.Domain;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -12,11 +14,14 @@ namespace BaseApi.V1.Infrastructure
         [DynamoDBHashKey]
         public Guid Id { get; set; }
 
-        [DynamoDBProperty(AttributeName = "charge_type")]
-        public string ChargeType { get; set; }
+        [DynamoDBProperty(AttributeName = "target_id")]
+        public Guid TargetId { get; set; }
 
-        [DynamoDBProperty(AttributeName = "charge_source")]
-        public string ChargeSource { get; set; }
+        [DynamoDBProperty(AttributeName = "target_type",Converter = typeof(DynamoDbEnumConverter<TargetType>))]
+        public TargetType TargetType { get; set; }
+
+        [DynamoDBProperty(AttributeName = "charge_type")] //,Converter = typeof(DynamoDbObjectConverter<ChargeType>)
+        public ChargeType ChargeType { get; set; }
 
         [DynamoDBProperty(AttributeName = "debit_code")]
         public string DebitCode { get; set; }
@@ -24,23 +29,19 @@ namespace BaseApi.V1.Infrastructure
         [DynamoDBProperty(AttributeName = "debit_code_description")]
         public string DebitCodeDescription { get; set; }
 
-        [DynamoDBProperty(AttributeName = "target_type",Converter = typeof(DynamoDbEnumConverter<TargetType>))]
-        public TargetType TargetType { get; set; }
+        [DynamoDBProperty(AttributeName = "effective_start_date",Converter =typeof(DynamoDbDateTimeConverter))]
+        public DateTime EffectiveStartDate { get; set; } 
 
-        [DynamoDBProperty(AttributeName = "effective_start_date")]
-        public DateTime EffectiveStartDate { get; set; }
-
-
-        [DynamoDBProperty(AttributeName = "termination_date")]
+        [DynamoDBProperty(AttributeName = "termination_date", Converter = typeof(DynamoDbDateTimeConverter))]
         public DateTime TerminationDate { get; set; }
 
         [DynamoDBProperty(AttributeName = "period_code")]
         public string PeriodCode { get; set; }
 
-        [DynamoDBProperty(AttributeName = "debit_next_due")]
+        [DynamoDBProperty(AttributeName = "debit_next_due", Converter = typeof(DynamoDbDateTimeConverter))]
         public DateTime DebitNextDue { get; set; }
 
-        [DynamoDBProperty(AttributeName = "debit_last_charged")]
+        [DynamoDBProperty(AttributeName = "debit_last_charged", Converter = typeof(DynamoDbDateTimeConverter))]
         public DateTime DebitLastCharged { get; set; }
 
         [DynamoDBProperty(AttributeName = "debit_active")]
@@ -55,7 +56,7 @@ namespace BaseApi.V1.Infrastructure
         [DynamoDBProperty(AttributeName = "debit_source")]
         public string DebitSource { get; set; }
 
-        [DynamoDBProperty(AttributeName = "timestamp")]
+        [DynamoDBProperty(AttributeName = "timestamp", Converter = typeof(DynamoDbDateTimeConverter))]
         public DateTime TimeStamp { get; set; }
 
         [DynamoDBProperty(AttributeName = "service_charge_schedule")]
@@ -63,5 +64,8 @@ namespace BaseApi.V1.Infrastructure
 
         [DynamoDBProperty(AttributeName = "data_import_source")]
         public string DataImportSource { get; set; }
+
+        [DynamoDBProperty(AttributeName = "charge_details", Converter = (typeof(DynamoDbObjectListConverter<ChargeDetails>)))]
+        public IEnumerable<ChargeDetails> ChargeDetails { get; set; }
     }
 }

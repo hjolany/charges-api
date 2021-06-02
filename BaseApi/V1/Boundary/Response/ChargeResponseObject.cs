@@ -1,4 +1,6 @@
+using ChargeApi.V1.Domain;
 using System;
+using System.Collections.Generic;
 
 namespace BaseApi.V1.Boundary.Response
 {
@@ -9,14 +11,12 @@ namespace BaseApi.V1.Boundary.Response
         /// 401
         /// </example>
         public Guid Id { get; set; }
+
+        public Guid TargetId { get; set; }
         /// <example>
         /// 
         /// </example>
-        public string ChargeType { get; set; }
-        /// <example>
-        /// 
-        /// </example>
-        public string ChargeSource { get; set; }
+        public ChargeType ChargeType { get; set; }
         /// <example>
         /// 
         /// </example>
@@ -73,5 +73,9 @@ namespace BaseApi.V1.Boundary.Response
         /// 
         /// </example>
         public string DataImportSource { get; set; }
+        /// <example>
+        /// 
+        /// </example>
+        public IEnumerable<ChargeDetails> ChargeDetails { get; set; }
     }
 }
